@@ -115,30 +115,42 @@
 // foo = value => `Ammar ${value}`
 // console.log(foo('Ahmed'));
 
-function storeQuestion() {
-    let textInput = document.getElementById('questionInput').value;
-    let test = {
-        question: textInput,
-        answer: {
-            option1: 'Hypertext Markup language *',
-            option2: 'Hyportext Markup lang',
-            option3: 'Hyper Mark language',
-        }
-    }
-    let optionText = 'Option \n'
-    for (const key in test.answer) {
-        optionText += `${test.answer[key]}\n`
-    };
-    document.getElementById('questionInput').value = `${textInput}\n\n${optionText}`;
-    
+function Options(option1, option2, option3) {
+    this.option1 = option1
+    this.option2 = option2
+    this.option3 = option3
 }
-function Constructor(option1 , option2, option3){
-    this.option1 = option1;
-    this.option2 = option2;
-    this.option3 = option3;
-};
-var answer = new Constructor('Casacading Style Sheets','Cas Strong Style','Control Style Sheet')
-
+var html = new Options(
+    'HypoText Markup Language',
+    'HyperText Markup Language ***',
+    'Hyper Mark Lang'
+)
+function storeQuestion() {
+    let textStored = document.getElementById('questionInput').value;
+    let test = {
+        question: textStored,
+        answer: html
+    }
+    if (textStored.toLowerCase().includes("css")) {
+        test.answer = new Options(
+            'Cascading Style Sheets**',
+            'Cas Strong Style',
+            'Control Style Sheet'
+        );
+    }
+    else if (textStored.toLowerCase().includes('javascript')) {
+        test.answer = new Options(
+            'Brain of Human',
+            'Brain of Website ***',
+            'Brain of Computer',
+        )
+    }
+    let optionDisplay = 'Option \n';
+    for (let key in test.answer) {
+        optionDisplay += `${test.answer[key]} \n`
+    }
+    document.getElementById('questionInput').value = `${test.question} \n${optionDisplay}`
+}
 
 /**
   function Constructor(option1, option2, option3) {
